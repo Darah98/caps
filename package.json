@@ -2,9 +2,10 @@
   "name": "caps",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "caps.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/Darah98/caps/issues"
   },
-  "homepage": "https://github.com/Darah98/caps#readme"
+  "homepage": "https://github.com/Darah98/caps#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "faker": "^4.1.0"
+  }
 }
