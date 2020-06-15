@@ -1,27 +1,28 @@
 'use strict';
 require('dotenv').config();
-const faker= require('faker');
-const events= require('./events.js');
-
-const orderInfo= {
-    store: process.env.STORE_NAME,
-    orderID: faker.random.uuid,
-    customer: faker.name.findName,
-    address: faker.address.city,
+const faker = require('faker');
+const events = require('./events.js');
+require('./caps.js');
+    require('./driver.js');
+function orderFaker() {
+    let orderInfo = {
+        store: process.env.STORE_NAME,
+        orderID: faker.random.uuid(),
+        customer: faker.name.findName(),
+        address: faker.address.streetAddress(),
+    }
+    return orderInfo;
 }
-events.on('pickup', pickupHandler);
-events.on('in-transit', transitHandler);
-events.on('delivered', deliverHandler);
-
-function pickupHandler(payload){
-    console.log(`--payload--${payload}`);
-}
-function transitHandler (payload){
-    console.log(`-----${payload}`);
-}
-function deliverHandler(payload){
-    console.log(`
-    THANK YOU for delivering:
-    -----${payload}`);
-}
-
+setInterval(function () {
+    const order = orderFaker();
+    setTimeout(() => {
+        events.emit('pickup', order);
+    }, 1000);
+    setTimeout(() => {
+        events.emit('in-transit', order);
+    }, 1500);
+    setTimeout(() => {
+        events.emit('delivered', order);
+    }, 2500);
+}, 5000);
+module.exports = orderFaker;
