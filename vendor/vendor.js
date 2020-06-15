@@ -1,9 +1,9 @@
 'use strict';
 require('dotenv').config();
 const faker = require('faker');
-const events = require('./events.js');
-require('./caps.js');
-    require('./driver.js');
+const events = require('../events.js');
+require('../caps/caps.js');
+    require('../driver/driver.js');
 function orderFaker() {
     let orderInfo = {
         store: process.env.STORE_NAME,

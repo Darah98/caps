@@ -1,6 +1,6 @@
 'use strict';
-const events = require('./events.js');
-require('./caps.js');
+const events = require('../events.js');
+require('../caps/caps.js');
 
 events.on('pickup', payload => {
     setTimeout(() => {
