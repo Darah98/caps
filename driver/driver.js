@@ -1,22 +1,16 @@
 'use strict';
-const events = require('../events.js');
-require('../caps/caps.js');
+require('dotenv').config();
+const net = require('net');
+const client= net.Socket();
+const HOST = process.env.HOST || 'localhost';
+const PORT = process.env.PORT || 3000;
+client.connect(PORT, HOST, ()=> {console.log('Connected');});
 
-events.on('pickup', payload => {
-    setTimeout(() => {
-        pickupHandler(payload);
-    }, 100);
+client.on('data', function(data) {
+  let order = JSON.parse(data);
+  console.log(order.event, order.orderID);
+  return order;
 });
-events.on('delivered', payload => {
-    setTimeout(() => {
-        deliveryHandler(payload)
-    }, 100);
+client.on('end', function() {
+  console.log('Connection ended');
 });
-
-function pickupHandler(payload) {
-    console.log('DRIVER: picked up', payload.orderID);
-}
-function deliveryHandler(payload) {
-    console.log('DRIVER: delivered up', payload.orderID);
-
-}

@@ -8,5 +8,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.3.0",
+    "faker": "^4.1.0",
+    "jest": "^26.0.1"
+  }
 }
